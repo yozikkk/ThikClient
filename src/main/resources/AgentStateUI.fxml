@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="569.0" prefWidth="929.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kz.nbt.cti.controller.AgentStateUI">
+   <children>
+      <Button fx:id="logoutButton" layoutX="236.0" layoutY="449.0" mnemonicParsing="false" onAction="#logout" text="Logout" />
+      <TextArea fx:id="ctiInfo" layoutX="33.0" layoutY="64.0" prefHeight="359.0" prefWidth="335.0" />
+      <TextArea fx:id="chat_output" layoutX="499.0" layoutY="64.0" prefHeight="288.0" prefWidth="371.0" />
+      <Button fx:id="next_chat" layoutX="604.0" layoutY="449.0" mnemonicParsing="false" text="next chat" onAction="#nextChat" />
+      <Button layoutX="733.0" layoutY="449.0" mnemonicParsing="false" onAction="#send" text="Send" />
+      <ToggleButton fx:id="readyForChat" layoutX="784.0" layoutY="23.0" mnemonicParsing="false" onAction="#readyForChat" text="chat on/off" />
+      <TextField fx:id="chat_input" layoutX="499.0" layoutY="379.0" prefHeight="40.0" prefWidth="371.0" />
+   </children>
+</AnchorPane>
