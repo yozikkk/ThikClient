@@ -7,6 +7,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import kz.nbt.cti.AgentState;
+import kz.nbt.cti.ops.AgentOps;
 import kz.nbt.cti.restapi.CallRestAPI;
 import kz.nbt.cti.socketsimple.Client;
 import kz.nbt.cti.websocket.WebSocketClient;
@@ -56,8 +57,9 @@ public class LoginController {
             e.printStackTrace();
         }
 
+ */
 
-*/
+
 
 
 
