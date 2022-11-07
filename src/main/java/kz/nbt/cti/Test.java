@@ -15,6 +15,12 @@ import javax.telephony.callcenter.ACDAddress;
 import javax.telephony.callcenter.ACDAddressListener;
 import javax.telephony.callcenter.Agent;
 import javax.telephony.callcenter.AgentTerminal;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class Test {
 
@@ -34,35 +40,17 @@ public class Test {
 
         try {
 
-            JtapiPeer peer = JtapiPeerFactory.getJtapiPeer(null);
-            String[] myServices = peer.getServices();
-            String providerString = myServices[0]+";login=crm1"+";passwd=P@ssword1";
-            provider = peer.getProvider(providerString);
-            list = new JtapiListener();
 
-            lucentAddr = (LucentAddress)provider.getAddress("1001");
-            lucentTerm = (LucentTerminal)provider.getTerminal("1001");
-
-            lucentAgent = (LucentV7Agent)lucentTerm.addAgent(
-            	lucentAddr, null, Agent.LOG_IN, 0, "2900", "12345");
-
-
-            lucentTerm.addCallListener(list);
-
-
-            //System.out.println("Lucent address : "+lucentAddr.getName());
-            //System.out.println("Lucent terminal: "+lucentTerm.getAgents()[0].getAgentID());
-
-            System.out.println("#####################################################################################");
-            System.out.println("############ALL TERMINALS HAS BEEN ADDED TO LISTENER SERVICE.OPERATION COMPLETED#####");
-            System.out.println("#####################################################################################");
+            String jsonInputString =  "{"
+                    + "\"chatid\":\""+"77012111143"+"\","
+                    + "\"message\":\""+"Echo message"+"\"}";
+            //rest.doSslPost(jsonInputString,"send_message","https://86.nbt.kz/");
+            doPost(jsonInputString,"send_message","http://localhost:9999/");
 
 
 
 
 
-        } catch (JtapiPeerUnavailableException e) {
-            e.printStackTrace();
 
         }
         catch (Exception e)
@@ -70,5 +58,39 @@ public class Test {
             e.printStackTrace();
         }
     }
+
+
+    private static  String doPost(String jsonInputString,String action,String url) throws IOException {
+
+        StringBuilder response = new StringBuilder();
+        URL createurl = new URL(url + action);
+        HttpURLConnection con = (HttpURLConnection) createurl.openConnection();
+        con.setRequestMethod("POST");
+        con.setRequestProperty("Content-Type", "application/json");
+        con.setRequestProperty("Accept", "application/json");
+        con.setDoOutput(true);
+        System.out.println(jsonInputString);
+        try (OutputStream os = con.getOutputStream()) {
+            byte[] input = jsonInputString.getBytes("utf-8");
+            os.write(input, 0, input.length);
+        }
+        try (BufferedReader br = new BufferedReader(
+                new InputStreamReader(con.getInputStream(), "utf-8"))) {
+
+            String responseLine = null;
+            while ((responseLine = br.readLine()) != null) {
+                response.append(responseLine.trim());
+            }
+        }
+        con.disconnect();
+        return response.toString();
+
+
+    }
+
+
+
+
+
 
 }
