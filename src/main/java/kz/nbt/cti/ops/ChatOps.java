@@ -64,6 +64,7 @@ public class ChatOps extends AgentStateUI {
                 if(!jsonNextObj.isNull("message")){
                     String jsonAssignChat =  "{ "
                             + "\"chatId\":\""+jsonNextObj.getLong("chatid")+"\","
+                            + "\"channel\":\""+jsonNextObj.getString("channel")+"\","
                             + "\"agentid\":\""+AgentState.agentid+"\"}";
                     callRest.doPost(jsonAssignChat,"assignChatToAgent");
 
