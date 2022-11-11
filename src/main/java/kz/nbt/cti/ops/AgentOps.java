@@ -78,6 +78,23 @@ public class AgentOps {
 
     }
 
+    public void  updateAgentState(boolean state){
+
+        String json =  "{ "
+                + "\"ready\":\""+state+"\","
+                + "\"agentid\":\""+ AgentState.agentid+"\"}";
+        CallRestAPI api = new CallRestAPI();
+        try{
+            api.doPost(json,"updateAgentState");
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+
+    }
+
 
 
 }

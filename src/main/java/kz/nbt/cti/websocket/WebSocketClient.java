@@ -26,56 +26,24 @@ public class WebSocketClient extends AgentStateUI
                 .addListener(new WebSocketAdapter() {
                     @Override
                     public void onTextMessage(WebSocket ws, String message) {
-                        time = new Date(); // текущая дата
-                        dt1 = new SimpleDateFormat("HH:mm:ss"); // берем только время до секунд
-                        dtime = dt1.format(time); // время
-                        //System.out.println("Received msg: " + message);
-
+                        time = new Date();
+                        dt1 = new SimpleDateFormat("HH:mm:ss");
+                        dtime = dt1.format(time);
                         JSONObject jsonObject = new JSONObject(message);
+                        if(jsonObject.isNull("content")){
+                            try {
+                                static_telega_output.setText(jsonObject.getString("telegram"));
+                                static_facebook_output.setText(jsonObject.getString("facebook"));
+                                static_whatsapp_output.setText(jsonObject.getString("whatsapp"));
+                                static_instagram_output.setText(jsonObject.getString("instagram"));
+                            }
+                            catch (Exception e){
+                            }
+                        }
                         String fullMesage = jsonObject.getString("content");
-                        //String from = jsonObject.getString("from");
-                        //static_chat_output.appendText(dtime+" from  "+from+ " "+fullMesage+"\n");
                         static_chat_output.appendText(dtime+" " +fullMesage+"\n");
-
-                        /*
-
-                        if(AgentState.isReady) {
-                            if(AgentState.chatid !=null) {
-                                JSONObject jsonObject = new JSONObject(message);
-                                String fullMesage = jsonObject.getString("content");
-                                String from = jsonObject.getString("from");
-                                static_chat_output.appendText(dtime+" from  "+from+ " "+fullMesage+"\n");
-                            }
-                            else{
-
-
-
-
-                                JSONObject jsonObject = new JSONObject(message);
-                                String fullMesage = jsonObject.getString("content");
-                                JSONObject jsonChatid = new JSONObject(fullMesage);
-                                Long chatid = jsonChatid.getLong("chatid");
-                                String from = jsonObject.getString("from");
-                                AgentState.chatid= chatid;
-
-                                static_chat_output.appendText(dtime+" from  "+from+ " "+fullMesage+"\n");
-
-
-
-                            }
-
-
-
-                            }
-                            */
-
-
-
                     }
                 })
                 .connect();
-       // websocket.sendText("Hey ha ha ha1");
-        // Don't forget to call disconnect() after use.
-        // websocket.disconnect();
     }
 }

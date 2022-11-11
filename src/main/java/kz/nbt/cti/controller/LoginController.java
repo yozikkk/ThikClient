@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import kz.nbt.cti.AgentState;
@@ -36,6 +37,8 @@ public class LoginController {
             stage.setTitle("Agent State UI");
             stage.setScene(scene);
             stage.initModality(Modality.NONE);
+            Image icon = new Image(getClass().getResourceAsStream("/images/cc_image.png"));
+            stage.getIcons().add(icon);
             stage.show();
 
         }

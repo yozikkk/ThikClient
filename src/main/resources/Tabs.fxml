@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<AnchorPane prefHeight="400.0" prefWidth="1096.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kz.nbt.cti.controller.AgentStateUI">
+   <children>
+      <TabPane prefHeight="675.0" prefWidth="1163.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Untitled Tab 1">
+            <content>
+                <AnchorPane prefHeight="650.0" prefWidth="1113.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" >
+                    <children>
+                        <Button fx:id="logoutButton" layoutX="156.0" layoutY="475.0" mnemonicParsing="false" onAction="#logout" text="Logout" />
+                        <TextArea fx:id="ctiInfo" layoutX="33.0" layoutY="64.0" prefHeight="383.0" prefWidth="210.0" />
+                        <TextArea fx:id="chat_output" layoutX="330.0" layoutY="67.0" prefHeight="306.0" prefWidth="546.0" />
+                        <Button fx:id="next_chat" layoutX="518.0" layoutY="475.0" mnemonicParsing="false" onAction="#nextChat" text="next chat" />
+                        <Button layoutX="620.0" layoutY="475.0" mnemonicParsing="false" onAction="#send" text="Send" />
+                        <ToggleButton fx:id="readyForChat" layoutX="784.0" layoutY="23.0" mnemonicParsing="false" onAction="#readyForChat" text="chat on/off" />
+                        <ImageView fitHeight="32.0" fitWidth="43.0" layoutX="1044.0" layoutY="106.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@images/telega.png" />
+                            </image>
+                        </ImageView>
+                        <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="1044.0" layoutY="155.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@images/whatsapp.png" />
+                            </image>
+                        </ImageView>
+                        <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="1044.0" layoutY="198.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@images/fb.png" />
+                            </image>
+                        </ImageView>
+                        <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="1044.0" layoutY="248.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@images/instagramm.png" />
+                            </image>
+                        </ImageView>
+                        <Separator layoutX="899.0" layoutY="64.0" prefWidth="200.0" />
+                        <Separator layoutX="899.0" layoutY="64.0" orientation="VERTICAL" prefHeight="200.0" />
+                        <Separator layoutX="899.0" layoutY="264.0" orientation="VERTICAL" prefHeight="200.0" />
+                        <Separator layoutX="899.0" layoutY="460.0" prefWidth="200.0" />
+                        <Label layoutX="985.0" layoutY="67.0" text="Queue" />
+                        <TextArea layoutX="981.0" layoutY="149.0" prefHeight="18.0" prefWidth="43.0" promptText="00" wrapText="true" />
+                        <TextArea layoutX="981.0" layoutY="194.0" prefHeight="39.0" prefWidth="43.0" promptText="00" />
+                        <TextArea layoutX="981.0" layoutY="244.0" prefHeight="39.0" prefWidth="42.0" promptText="00" />
+                        <TextArea fx:id="telega_output" layoutX="981.0" layoutY="102.0" prefHeight="32.0" prefWidth="43.0" promptText="00" />
+                        <TextField fx:id="chat_input" layoutX="330.0" layoutY="399.0" prefHeight="47.0" prefWidth="546.0" promptText="Введите текст для отправки ...." />
+                    </children>
+                </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Untitled Tab 2">
+            <content>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>
