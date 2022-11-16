@@ -28,21 +28,19 @@ public class AgentOps {
 
 
 
-    public void login(String station,String agent,String passwd){
+    public void login(String station,String agent,String passwd) throws Exception{
 
         this.station = station;
         ProviderInitialyze providerInitialyze = new ProviderInitialyze();
         provider =  providerInitialyze.getProvider();
-        try{
+
             lucentAddr = (LucentAddress)provider.getAddress(station);
             lucentTerm = (LucentTerminal)provider.getTerminal(station);
             lucentAgent = (LucentV7Agent)lucentTerm.addAgent(
                     lucentAddr, null, Agent.LOG_IN, 0, agent, passwd);
 
-        }
-        catch (Exception e){
-            System.err.println(e);
-        }
+
+
 
     }
 
@@ -64,13 +62,9 @@ public class AgentOps {
 
     public void addCallListener(){
         try{
-            System.out.println("Провайдер: "+provider.getTerminals().toString());
-            System.out.println("Добавляем терминал :"+lucentTerm.getName());
-
             lucentTerm = (LucentTerminal)provider.getTerminal(station);
             listener = new JtapiListener();
             lucentTerm.addCallListener(listener);
-            //provider.getTerminal(lucentTerm.getName()).addCallListener(listener);
         }
         catch (Exception e){
             System.err.println(e);

@@ -33,7 +33,8 @@ public class ChatOps extends AgentStateUI {
             String pattern1 = "HH:mm:ss";
             simpleDateFormat = new SimpleDateFormat(pattern1);
             String date1 = simpleDateFormat.format(new Date());
-            static_chat_output.appendText(date1+"  "+message+"\n");
+            static_chat_output.appendText(date1+" Агент: "+message+"\n");
+
 
 
         }
@@ -54,9 +55,7 @@ public class ChatOps extends AgentStateUI {
         CallRestAPI callRest = new CallRestAPI();
 
         try{
-
-
-               String jsonInputString =  "{ "
+                String jsonInputString =  "{ "
                     + "\"agentid\":\""+AgentState.agentid+"\"}";
                 callRest.doPost(jsonInputString, "unAssignChatToAgent");
                 JSONObject jsonNextObj = new JSONObject(callRest.doGet("getMessage",null));
@@ -67,22 +66,14 @@ public class ChatOps extends AgentStateUI {
                             + "\"channel\":\""+jsonNextObj.getString("channel")+"\","
                             + "\"agentid\":\""+AgentState.agentid+"\"}";
                     callRest.doPost(jsonAssignChat,"assignChatToAgent");
-
-
-
                     String nextMessage = jsonNextObj.getString("message");
                     for(String message :nextMessage .split(";") ) {
                         System.out.println(message);
                         static_chat_output.appendText(date+"  "+message+"\n");
                 }
             }
-
                 else {
-
                     static_chat_output.appendText(date+" нет активных чатов \n");
-
-
-
                 }
         }
         catch (Exception e){

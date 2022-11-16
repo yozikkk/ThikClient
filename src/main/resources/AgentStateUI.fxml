@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="650.0" prefWidth="1113.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kz.nbt.cti.controller.AgentStateUI">
+<AnchorPane prefHeight="650.0" prefWidth="1113.0" style="-fx-font-family: Consolas; -fx-control-inner-background:#E0E6E7;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kz.nbt.cti.controller.AgentStateUI">
     <children>
         <TabPane prefHeight="675.0" prefWidth="1163.0" tabClosingPolicy="UNAVAILABLE">
             <tabs>
@@ -12,47 +20,71 @@
                     <content>
                         <AnchorPane prefHeight="650.0" prefWidth="1113.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
                             <children>
-                                <Button fx:id="logoutButton" layoutX="156.0" layoutY="475.0" mnemonicParsing="false" onAction="#logout" text="Logout" />
+                                <Button fx:id="logoutButton" layoutX="125.0" layoutY="529.0" mnemonicParsing="false" onAction="#logout" prefHeight="46.0" prefWidth="45.0" style="-fx-background-radius: 5em;">
+                           <graphic>
+                              <FontAwesomeIconView glyphName="WINDOW_CLOSE" size="20" />
+                           </graphic></Button>
                                 <TextArea fx:id="ctiInfo" layoutX="33.0" layoutY="64.0" prefHeight="383.0" prefWidth="210.0" />
-                                <TextArea fx:id="chat_output" layoutX="330.0" layoutY="67.0" prefHeight="306.0" prefWidth="546.0" />
-                                <Button fx:id="next_chat" layoutX="518.0" layoutY="475.0" mnemonicParsing="false" onAction="#nextChat" text="next chat" />
-                                <Button layoutX="620.0" layoutY="475.0" mnemonicParsing="false" onAction="#send" text="Send" />
-                                <ToggleButton fx:id="readyForChat" layoutX="784.0" layoutY="23.0" mnemonicParsing="false" onAction="#readyForChat" text="chat on/off" />
-
-
-                                <ImageView fitHeight="32.0" fitWidth="43.0" layoutX="1044.0" layoutY="106.0" pickOnBounds="true" preserveRatio="true">
-                                    <image>
-                                        <Image url="@images/telega.png" />
-                                    </image>
-                                </ImageView>
-                                <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="1044.0" layoutY="155.0" pickOnBounds="true" preserveRatio="true">
-                                    <image>
-                                        <Image url="@images/whatsapp.png" />
-                                    </image>
-                                </ImageView>
-                                <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="1044.0" layoutY="198.0" pickOnBounds="true" preserveRatio="true">
-                                    <image>
-                                        <Image url="@images/fb.png" />
-                                    </image>
-                                </ImageView>
-                                <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="1044.0" layoutY="248.0" pickOnBounds="true" preserveRatio="true">
-                                    <image>
-                                        <Image url="@images/instagramm.png" />
-                                    </image>
-                                </ImageView>
-
-
-
-                                <Separator layoutX="899.0" layoutY="64.0" prefWidth="200.0" />
+                                <TextArea fx:id="chat_output" layoutX="330.0" layoutY="67.0" prefHeight="306.0" prefWidth="546.0">
+                           <font>
+                              <Font name="Calibri" size="15.0" />
+                           </font></TextArea>
+                                <Button fx:id="next_chat" layoutX="838.0" layoutY="458.0" mnemonicParsing="false" onAction="#nextChat" prefHeight="41.0" prefWidth="42.0" style="-fx-background-radius: 5em;">
+                           <graphic>
+                              <FontAwesomeIconView glyphName="FAST_FORWARD" size="20" text="" />
+                           </graphic></Button>
+                                <Button layoutX="838.0" layoutY="400.0" mnemonicParsing="false" onAction="#send" prefHeight="42.0" prefWidth="41.0" style="-fx-background-radius: 5em;">
+                           <graphic>
+                              <FontAwesomeIconView glyphName="PAPER_PLANE" size="20" wrappingWidth="20.0" />
+                           </graphic></Button>
+                                <ToggleButton fx:id="readyForChat" layoutX="765.0" layoutY="23.0" mnemonicParsing="false" onAction="#readyForChat" text="chat on/off">
+                           <graphic>
+                              <FontAwesomeIconView glyphName="TOGGLE_ON" size="15" />
+                           </graphic></ToggleButton>
                                 <Separator layoutX="899.0" layoutY="64.0" orientation="VERTICAL" prefHeight="200.0" />
                                 <Separator layoutX="899.0" layoutY="264.0" orientation="VERTICAL" prefHeight="200.0" />
-                                <Separator layoutX="899.0" layoutY="460.0" prefWidth="200.0" />
-                                <Label layoutX="985.0" layoutY="67.0" text="Queue" />
-                                <TextArea fx:id="whatsapp_output" editable="false" layoutX="981.0" layoutY="149.0" prefHeight="18.0" prefWidth="43.0" promptText="00" />
-                                <TextArea fx:id="facebook_output" editable="false" layoutX="981.0" layoutY="194.0" prefHeight="39.0" prefWidth="43.0" promptText="00" />
-                                <TextArea fx:id="instagram_output" editable="false" layoutX="981.0" layoutY="244.0" prefHeight="39.0" prefWidth="42.0" promptText="00" />
-                                <TextArea fx:id="telega_output" editable="false" layoutX="981.0" layoutY="102.0" prefHeight="32.0" prefWidth="43.0" promptText="00" />
-                                <TextField fx:id="chat_input" layoutX="330.0" layoutY="399.0" onAction="#sendOnEnter" prefHeight="47.0" prefWidth="546.0" promptText="Введите текст для отправки ...." />
+                                <TextArea fx:id="whatsapp_output" editable="false" layoutX="976.0" layoutY="180.0" prefHeight="55.0" prefWidth="66.0" promptText="00">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font></TextArea>
+                                <TextArea fx:id="facebook_output" editable="false" layoutX="975.0" layoutY="256.0" prefHeight="55.0" prefWidth="66.0" promptText="00">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font></TextArea>
+                                <TextArea fx:id="instagram_output" editable="false" layoutX="976.0" layoutY="330.0" prefHeight="51.0" prefWidth="66.0" promptText="00">
+                           <font>
+                              <Font size="18.0" />
+                           </font></TextArea>
+                                <TextField fx:id="chat_input" layoutX="330.0" layoutY="399.0" onAction="#sendOnEnter" prefHeight="47.0" prefWidth="498.0" promptText="Введите текст для отправки ....">
+                           <font>
+                              <Font name="Calibri" size="15.0" />
+                           </font></TextField>
+                        <Button fx:id="logoutButton1" layoutX="69.0" layoutY="466.0" mnemonicParsing="false" onAction="#logout" prefHeight="46.0" prefWidth="45.0" style="-fx-background-radius: 5em;">
+                           <graphic>
+                              <FontAwesomeIconView fill="#f75200" glyphName="PHONE" size="20" />
+                           </graphic></Button>
+                        <Button fx:id="logoutButton11" layoutX="171.0" layoutY="466.0" mnemonicParsing="false" onAction="#logout" prefHeight="46.0" prefWidth="45.0" style="-fx-background-radius: 5em;">
+                           <graphic>
+                              <FontAwesomeIconView fill="#12c757" glyphName="TTY" size="20" />
+                           </graphic></Button>
+                        <FontAwesomeIconView fill="#2487c4" glyphName="TELEGRAM" layoutX="1057.0" layoutY="148.0" size="40" wrappingWidth="30.4000244140625" />
+                        <FontAwesomeIconView fill="#2bdf3d" glyphName="WHATSAPP" layoutX="1060.0" layoutY="221.0" size="40" text="" wrappingWidth="25.5999755859375" />
+                        <FontAwesomeIconView fill="#223def" glyphName="FACEBOOK" layoutX="1061.0" layoutY="297.0" size="40" text="" />
+                        <FontAwesomeIconView fill="#b725c1" glyphName="INSTAGRAM" layoutX="1056.0" layoutY="363.0" size="40" />
+                        <FontAwesomeIconView glyphName="GROUP" layoutX="984.0" layoutY="96.0" size="35" text="" wrappingWidth="49.74295425415039" />
+                        <TextArea fx:id="telega_output" editable="false" layoutX="975.0" layoutY="114.0" prefHeight="50.0" prefWidth="65.0" promptText="00">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font></TextArea>
+                        <Label layoutX="33.0" layoutY="606.0" text="Voice Channel:" />
+                        <Label layoutX="243.0" layoutY="606.0" text="Chat channles:" />
+                        <Label fx:id="voice_channel_status" layoutX="134.0" layoutY="605.0" prefHeight="14.0" prefWidth="68.0" text="Label" />
+                        <Label fx:id="chat_channel_status" layoutX="343.0" layoutY="606.0" text="Label" textFill="#181818" />
+                        <Separator layoutX="899.0" layoutY="458.0" orientation="VERTICAL" prefHeight="163.0" prefWidth="2.0" />
+                        <Separator layoutX="899.0" layoutY="14.0" orientation="VERTICAL" prefHeight="200.0" />
+                        <Separator layoutX="275.0" layoutY="23.0" orientation="VERTICAL" prefHeight="200.0" />
+                        <Separator layoutX="275.0" layoutY="214.0" orientation="VERTICAL" prefHeight="200.0" />
+                        <Separator layoutX="275.0" layoutY="373.0" orientation="VERTICAL" prefHeight="200.0" />
                             </children>
                         </AnchorPane>
                     </content>

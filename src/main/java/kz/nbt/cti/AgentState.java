@@ -7,6 +7,10 @@ public class AgentState {
 
     public static String agentid;
 
+    public  static boolean chatIsReady;
+    public  static boolean voiceIsReady;
+
+
 
 
 }

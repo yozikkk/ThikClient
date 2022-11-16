@@ -10,7 +10,7 @@
       <Button fx:id="exit" layoutX="234.0" layoutY="234.0" mnemonicParsing="false" text="Exit" onAction="#terminate"/>
       <TextField fx:id="ext" layoutX="149.0" layoutY="90.0" />
       <TextField fx:id="agent" layoutX="149.0" layoutY="136.0" />
-      <TextField fx:id="passwd"  layoutX="149.0" layoutY="188.0" />
+      <PasswordField fx:id="passwd"  layoutX="149.0" layoutY="188.0" />
       <Label layoutX="83.0" layoutY="94.0" text="Extention" />
       <Label layoutX="92.0" layoutY="140.0" text="Agent" />
       <Label layoutX="83.0" layoutY="192.0" text="Password" />

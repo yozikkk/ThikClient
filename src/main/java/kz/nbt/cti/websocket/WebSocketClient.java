@@ -32,6 +32,7 @@ public class WebSocketClient extends AgentStateUI
                         JSONObject jsonObject = new JSONObject(message);
                         if(jsonObject.isNull("content")){
                             try {
+                                //static_telega_output.setText(jsonObject.getString("telegram"));
                                 static_telega_output.setText(jsonObject.getString("telegram"));
                                 static_facebook_output.setText(jsonObject.getString("facebook"));
                                 static_whatsapp_output.setText(jsonObject.getString("whatsapp"));
@@ -41,7 +42,7 @@ public class WebSocketClient extends AgentStateUI
                             }
                         }
                         String fullMesage = jsonObject.getString("content");
-                        static_chat_output.appendText(dtime+" " +fullMesage+"\n");
+                        static_chat_output.appendText(dtime+" Клиент: " +fullMesage+"\n");
                     }
                 })
                 .connect();

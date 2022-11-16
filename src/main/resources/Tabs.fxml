@@ -5,6 +5,8 @@
 
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
+<?import org.kordamp.ikonli.javafx.StackedFontIcon?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 <AnchorPane prefHeight="400.0" prefWidth="1096.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kz.nbt.cti.controller.AgentStateUI">
    <children>
       <TabPane prefHeight="675.0" prefWidth="1163.0" tabClosingPolicy="UNAVAILABLE">
@@ -38,7 +40,10 @@
                             <image>
                                 <Image url="@images/instagramm.png" />
                             </image>
+
                         </ImageView>
+
+
                         <Separator layoutX="899.0" layoutY="64.0" prefWidth="200.0" />
                         <Separator layoutX="899.0" layoutY="64.0" orientation="VERTICAL" prefHeight="200.0" />
                         <Separator layoutX="899.0" layoutY="264.0" orientation="VERTICAL" prefHeight="200.0" />

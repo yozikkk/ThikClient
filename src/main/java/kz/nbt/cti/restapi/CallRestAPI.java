@@ -81,7 +81,7 @@ public String doGet(String action,Long chatid) throws IOException{
 	      HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 	      conn.setRequestMethod("GET");
 	      try (BufferedReader reader = new BufferedReader(
-	                  new InputStreamReader(conn.getInputStream()))) {
+	                  new InputStreamReader(conn.getInputStream(),"utf-8"))) {
 	          for (String line; (line = reader.readLine()) != null; ) {
 	              result.append(line);
 	          }
