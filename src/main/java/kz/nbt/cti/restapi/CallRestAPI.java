@@ -14,7 +14,7 @@ public class CallRestAPI {
 		
 
 	      StringBuilder response = new StringBuilder();
-	      URL url = new URL ("http://localhost:8080/"+action);
+	      URL url = new URL ("http://192.168.2.99:8080/"+action);
 	      HttpURLConnection con = (HttpURLConnection)url.openConnection();
 	      con.setRequestMethod("POST");
 	      con.setRequestProperty("Content-Type", "application/json; utf-8");
@@ -43,7 +43,7 @@ public class CallRestAPI {
 	public String doDelete(String jsonInputString,String action) throws IOException{
 		
 	      StringBuilder response = new StringBuilder();
-	      URL url = new URL ("http://localhost:8080/"+action);
+	      URL url = new URL ("http://192.168.2.99:8080/"+action);
 	      HttpURLConnection con = (HttpURLConnection)url.openConnection();
 	      con.setRequestMethod("DELETE");
 	      con.setRequestProperty("Content-Type", "application/json; utf-8");
@@ -73,10 +73,10 @@ public String doGet(String action,Long chatid) throws IOException{
 	      URL url;
 	      StringBuilder result = new StringBuilder();      
 	      if(chatid == null) {	  
-	    	  url = new URL("http://localhost:8080/"+action);  
+	    	  url = new URL("http://192.168.2.99:8080/"+action);
 	      }
 	      else {
-	    	  url = new URL("http://localhost:8080/"+action+"?chatid="+chatid);   	  
+	    	  url = new URL("http://192.168.2.99:8080/"+action+"?chatid="+chatid);
 	      }
 	      HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 	      conn.setRequestMethod("GET");
@@ -89,15 +89,33 @@ public String doGet(String action,Long chatid) throws IOException{
 		
 	  return result.toString();
 	}
-	
-	
-	
-	
+
+	public String getCustomerInfo(String action,Long chatid) throws IOException{
+
+
+		URL url;
+		StringBuilder result = new StringBuilder();
+
+		url = new URL("http://192.168.2.99:8080/"+action+"?clientid="+chatid);
+
+		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+		conn.setRequestMethod("GET");
+		try (BufferedReader reader = new BufferedReader(
+				new InputStreamReader(conn.getInputStream(),"utf-8"))) {
+			for (String line; (line = reader.readLine()) != null; ) {
+				result.append(line);
+			}
+		}
+
+		return result.toString();
+	}
 
 
 
 
-	
-	
+
+
+
+
 
 }

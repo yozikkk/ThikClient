@@ -3,10 +3,11 @@ package kz.nbt.cti.ops;
 import kz.nbt.cti.AgentState;
 import kz.nbt.cti.controller.AgentStateUI;
 import kz.nbt.cti.restapi.CallRestAPI;
-import org.json.JSONException;
+import kz.nbt.cti.timer.CallTimer;
 import org.json.JSONObject;
 
-import java.io.IOException;
+import javax.telephony.InvalidArgumentException;
+import javax.telephony.InvalidStateException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -27,15 +28,12 @@ public class ChatOps extends AgentStateUI {
                     + "\"date\":\""+date+"\","
                     + "\"channel\":\""+channel+"\"}";
 
-
             CallRestAPI api = new CallRestAPI();
             api.doPost(jsonInputString,"sendMessage");
             String pattern1 = "HH:mm:ss";
             simpleDateFormat = new SimpleDateFormat(pattern1);
             String date1 = simpleDateFormat.format(new Date());
             static_chat_output.appendText(date1+" Агент: "+message+"\n");
-
-
 
         }
         catch (Exception e){
@@ -46,7 +44,14 @@ public class ChatOps extends AgentStateUI {
     }
 
 
-    public void nextChat()  {
+    public void nextChat() throws InvalidArgumentException, InvalidStateException {
+
+        AgentOps agentOps = new AgentOps();
+        agentOps.setTelephonyState(true);
+        CallTimer.stop();
+        static_call_timer.setText("00:00:00");
+        static_current_channel.setText("none");
+
 
 
         String pattern = "HH:mm:ss";

@@ -6,7 +6,7 @@ import com.avaya.jtapi.tsapi.LucentAgent;
 import com.avaya.jtapi.tsapi.LucentTerminal;
 import com.avaya.jtapi.tsapi.LucentV7Agent;
 import kz.nbt.cti.AgentState;
-import kz.nbt.cti.ProviderInitialyze;
+import kz.nbt.cti.ProviderInitialize;
 import kz.nbt.cti.listeners.JtapiListener;
 import kz.nbt.cti.restapi.CallRestAPI;
 
@@ -31,13 +31,15 @@ public class AgentOps {
     public void login(String station,String agent,String passwd) throws Exception{
 
         this.station = station;
-        ProviderInitialyze providerInitialyze = new ProviderInitialyze();
+        ProviderInitialize providerInitialyze = new ProviderInitialize();
         provider =  providerInitialyze.getProvider();
 
             lucentAddr = (LucentAddress)provider.getAddress(station);
             lucentTerm = (LucentTerminal)provider.getTerminal(station);
             lucentAgent = (LucentV7Agent)lucentTerm.addAgent(
                     lucentAddr, null, Agent.LOG_IN, 0, agent, passwd);
+
+
 
 
 
@@ -72,8 +74,9 @@ public class AgentOps {
 
     }
 
-    public void  updateAgentState(boolean state){
+    public void  updateAgentState(boolean state) throws InvalidArgumentException, InvalidStateException {
 
+        // setTelephonyState(state);
         String json =  "{ "
                 + "\"ready\":\""+state+"\","
                 + "\"agentid\":\""+ AgentState.agentid+"\"}";
@@ -88,6 +91,19 @@ public class AgentOps {
 
 
     }
+
+    public void setTelephonyState(boolean state) throws InvalidArgumentException, InvalidStateException {
+        if(state){
+            lucentAgent.setState(Agent.READY);
+            AgentState.voiceIsReady=true;
+
+        }
+        else {
+            lucentAgent.setState(Agent.WORK_NOT_READY);
+            AgentState.voiceIsReady=false;
+        }
+    }
+
 
 
 

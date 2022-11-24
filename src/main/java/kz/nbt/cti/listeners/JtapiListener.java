@@ -3,9 +3,13 @@ package kz.nbt.cti.listeners;
 import com.avaya.jtapi.tsapi.LucentV5CallInfo;
 import com.avaya.jtapi.tsapi.OriginalCallInfo;
 import com.avaya.jtapi.tsapi.csta1.LucentV7DeliveredEvent;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
+import kz.nbt.cti.AgentState;
 import kz.nbt.cti.controller.AgentStateUI;
+import kz.nbt.cti.restapi.CallRestAPI;
+import kz.nbt.cti.timer.CallTimer;
 
 import javax.telephony.Address;
 import javax.telephony.CallEvent;
@@ -46,6 +50,59 @@ public class JtapiListener extends AgentStateUI implements CallControlTerminalCo
     @Override
     public void terminalConnectionDropped(CallControlTerminalConnectionEvent callControlTerminalConnectionEvent) {
 
+
+        String ucid = CallUtils.getUCID(callControlTerminalConnectionEvent.getCall());
+        long callID = CallUtils.getCallID(callControlTerminalConnectionEvent.getCall());
+        callingAddress = callControlTerminalConnectionEvent.getCallingAddress();
+        calledAddress = callControlTerminalConnectionEvent.getCalledAddress();
+
+        try{
+
+            long time = System.currentTimeMillis();
+            SimpleDateFormat dayTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+            String str = dayTime.format(new Date(time));
+            // static_ctiInfo.appendText("connectionAlerting :: :: CallID ::"+callID+"::Calling party::"+callingAddress.getName()+"::Called party::"+calledAddress.getName()+"\n");
+
+            CallTimer.stop();
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    static_ctiInfo.setText("");
+                    static_current_channel.setText("none");
+                    static_call_timer.setText("00:00:00");
+                }
+            });
+
+
+
+
+
+
+            String json =  "{ "
+                    + "\"agentid\":\""+ AgentState.agentid+"\"}";
+            CallRestAPI api = new CallRestAPI();
+            try{
+                api.doPost(json,"unAssignChatToAgent");
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
+
+
+
+
+        }
+
+        catch (Exception e){
+
+            System.err.println(e);
+        }
+
+
+
+
+
+
     }
 
     @Override
@@ -67,6 +124,42 @@ public class JtapiListener extends AgentStateUI implements CallControlTerminalCo
 
     @Override
     public void terminalConnectionTalking(CallControlTerminalConnectionEvent callControlTerminalConnectionEvent) {
+
+
+        String ucid = CallUtils.getUCID(callControlTerminalConnectionEvent.getCall());
+        long callID = CallUtils.getCallID(callControlTerminalConnectionEvent.getCall());
+        callingAddress = callControlTerminalConnectionEvent.getCallingAddress();
+        calledAddress = callControlTerminalConnectionEvent.getCalledAddress();
+
+        try{
+
+            long time = System.currentTimeMillis();
+            SimpleDateFormat dayTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+            String str = dayTime.format(new Date(time));
+            // static_ctiInfo.appendText("connectionAlerting :: :: CallID ::"+callID+"::Calling party::"+callingAddress.getName()+"::Called party::"+calledAddress.getName()+"\n");
+            CallTimer timer = new CallTimer();
+            timer.start();
+            String json =  "{ "
+                    + "\"agentid\":\""+ AgentState.agentid+"\"}";
+            CallRestAPI api = new CallRestAPI();
+            try{
+                api.doPost(json,"unAssignChatToAgent");
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+
+        catch (Exception e){
+            System.err.println(e);
+        }
+
+
+
+
+
+
+
 
     }
 
@@ -118,7 +211,31 @@ public class JtapiListener extends AgentStateUI implements CallControlTerminalCo
             long time = System.currentTimeMillis();
             SimpleDateFormat dayTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
             String str = dayTime.format(new Date(time));
-            static_ctiInfo.appendText("connectionAlerting :: :: CallID ::"+callID+"::Calling party::"+callingAddress.getName()+"::Called party::"+calledAddress.getName()+"\n");
+           // static_ctiInfo.appendText("connectionAlerting :: :: CallID ::"+callID+"::Calling party::"+callingAddress.getName()+"::Called party::"+calledAddress.getName()+"\n");
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    static_ctiInfo.setText(callingAddress.getName());
+                    static_current_channel.setText("voice");
+                }
+            });
+
+
+
+
+            String json =  "{ "
+                    + "\"chatId\":\""+callingAddress.getName()+"\","
+                    + "\"channel\":\""+"voice"+"\","
+                    + "\"agentid\":\""+ AgentState.agentid+"\"}";
+            CallRestAPI api = new CallRestAPI();
+            try{
+                api.doPost(json,"assignChatToAgent");
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
+
+
 
 
         }
