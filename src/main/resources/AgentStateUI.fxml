@@ -33,15 +33,11 @@
                            <font>
                               <Font name="Calibri" size="15.0" />
                            </font></TextArea>
-                                <Button fx:id="next_chat" layoutX="1319.0" layoutY="712.0" mnemonicParsing="false" onAction="#nextChat" prefHeight="41.0" prefWidth="42.0" style="-fx-background-radius: 5em;">
-                           <graphic>
-                              <FontAwesomeIconView glyphName="FAST_FORWARD" size="20" text="" />
-                           </graphic></Button>
-                                <Button layoutX="1319.0" layoutY="651.0" mnemonicParsing="false" onAction="#send" prefHeight="42.0" prefWidth="41.0" style="-fx-background-radius: 5em;">
+                                <Button layoutX="1292.0" layoutY="688.0" mnemonicParsing="false" onAction="#send" prefHeight="42.0" prefWidth="41.0" style="-fx-background-radius: 5em;">
                            <graphic>
                               <FontAwesomeIconView glyphName="PAPER_PLANE" size="20" wrappingWidth="20.0" />
                            </graphic></Button>
-                                <TextField fx:id="chat_input" layoutX="666.0" layoutY="685.0" onAction="#sendOnEnter" prefHeight="47.0" prefWidth="631.0" promptText="Введите текст для отправки ....">
+                                <TextField fx:id="chat_input" layoutX="666.0" layoutY="685.0" onAction="#sendOnEnter" prefHeight="47.0" prefWidth="610.0" promptText="Введите текст для отправки ....">
                            <font>
                               <Font name="Calibri" size="15.0" />
                            </font></TextField>
@@ -53,10 +49,10 @@
                            <graphic>
                               <FontAwesomeIconView fill="#ef0c00" glyphName="TTY" size="20" />
                            </graphic></Button>
-                        <Label layoutX="34.0" layoutY="778.0" text="Voice Channel:" />
-                        <Label layoutX="211.0" layoutY="778.0" text="Chat channles:" />
-                        <Label fx:id="voice_channel_status" layoutX="142.0" layoutY="778.0" prefHeight="14.0" prefWidth="68.0" text="Label" />
-                        <Label fx:id="chat_channel_status" layoutX="314.0" layoutY="778.0" text="Label" textFill="#181818" />
+                        <Label layoutX="32.0" layoutY="803.0" text="Voice Channel:" />
+                        <Label layoutX="209.0" layoutY="803.0" text="Chat channles:" />
+                        <Label fx:id="voice_channel_status" layoutX="140.0" layoutY="803.0" prefHeight="14.0" prefWidth="68.0" text="Label" />
+                        <Label fx:id="chat_channel_status" layoutX="312.0" layoutY="803.0" text="Label" textFill="#181818" />
                         <Label fx:id="label_output" layoutX="994.0" layoutY="414.0" />
                         <Label layoutX="26.0" layoutY="94.0" text="Client id" />
                         <Button fx:id="logoutButton111" layoutX="136.0" layoutY="16.0" mnemonicParsing="false" onAction="#logout" prefHeight="46.0" prefWidth="45.0" style="-fx-background-radius: 5em;">
@@ -102,44 +98,49 @@
                         <Line endX="-100.0" endY="282.0" layoutX="656.0" layoutY="442.0" startX="-100.0" />
                         <Line endX="100.0" layoutX="456.0" layoutY="725.0" startX="-439.0" />
                         <Label layoutX="621.0" layoutY="19.0" />
-                        <Pane layoutX="660.0" layoutY="83.0" prefHeight="85.0" prefWidth="334.0" style="-fx-background-color: #DBE2DF;">
+                        <Pane layoutX="671.0" layoutY="56.0" prefHeight="119.0" prefWidth="323.0" style="-fx-background-color: #DBE2DF;">
                            <children>
                               <Label fx:id="current_channel" layoutX="244.0" layoutY="-2.0" prefHeight="35.0" prefWidth="51.0" text="NONE" textAlignment="JUSTIFY">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="call_timer" layoutX="231.0" layoutY="19.0" prefHeight="51.0" prefWidth="66.0" text="00:00:00" textAlignment="JUSTIFY" textFill="#19e485">
+                              <Label fx:id="call_timer" layoutX="241.0" layoutY="24.0" prefHeight="42.0" prefWidth="57.0" text="00:00:00" textAlignment="JUSTIFY" textFill="#19e485">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
                               </Label>
                               <Label layoutX="14.0" layoutY="-8.0" prefHeight="47.0" prefWidth="217.0" text="Текущий канал обслуживания:" textAlignment="CENTER" />
                               <Label layoutX="14.0" layoutY="36.0" text="Время обслуживания:" />
+                                      <Button fx:id="next_chat" layoutX="243.0" layoutY="60.0" minWidth="53.0" mnemonicParsing="false" onAction="#nextChat" prefHeight="42.0" prefWidth="53.0" style="-fx-background-radius: 5em;">
+                                 <graphic>
+                                    <FontAwesomeIconView glyphName="CHECK_CIRCLE" size="20" wrappingWidth="20.0" />
+                                 </graphic>
+                              </Button>
                            </children>
                         </Pane>
-                        <Pane layoutX="1077.0" layoutY="79.0" prefHeight="94.0" prefWidth="269.0" style="-fx-background-color: #DBE2DF;">
+                        <Pane layoutX="1077.0" layoutY="56.0" prefHeight="122.0" prefWidth="262.0" style="-fx-background-color: #DBE2DF;">
                            <children>
-                              <FontAwesomeIconView fill="#2487c4" glyphName="TELEGRAM" layoutX="24.0" layoutY="47.0" size="25" wrappingWidth="30.4000244140625" />
-                              <Label fx:id="telega_output" layoutX="25.0" layoutY="59.0" text="label" textAlignment="JUSTIFY" textFill="#0c41d4">
+                              <FontAwesomeIconView fill="#2487c4" glyphName="TELEGRAM" layoutX="24.0" layoutY="65.0" size="25" wrappingWidth="30.4000244140625" />
+                              <Label fx:id="telega_output" layoutX="25.0" layoutY="76.0" text="label" textAlignment="JUSTIFY" textFill="#0c41d4">
                                  <font>
                                     <Font name="Calibri Bold" size="14.0" />
                                  </font>
                               </Label>
-                              <FontAwesomeIconView fill="#2bdf3d" glyphName="WHATSAPP" layoutX="90.0" layoutY="47.0" size="25" text="" wrappingWidth="25.5999755859375" />
-                              <Label fx:id="whatsapp_output" layoutX="89.0" layoutY="59.0" text="label" textAlignment="JUSTIFY" textFill="#0c41d4">
+                              <FontAwesomeIconView fill="#2bdf3d" glyphName="WHATSAPP" layoutX="90.0" layoutY="65.0" size="25" text="" wrappingWidth="25.5999755859375" />
+                              <Label fx:id="whatsapp_output" layoutX="87.0" layoutY="76.0" text="label" textAlignment="JUSTIFY" textFill="#0c41d4">
                                  <font>
                                     <Font name="Calibri Bold" size="14.0" />
                                  </font>
                               </Label>
-                              <FontAwesomeIconView fill="#223def" glyphName="FACEBOOK_OFFICIAL" layoutX="154.0" layoutY="47.0" size="25" text="" />
-                              <Label fx:id="facebook_output" layoutX="147.0" layoutY="57.0" text="label" textAlignment="JUSTIFY" textFill="#0c41d4">
+                              <FontAwesomeIconView fill="#223def" glyphName="FACEBOOK_OFFICIAL" layoutX="154.0" layoutY="65.0" size="25" text="" />
+                              <Label fx:id="facebook_output" layoutX="147.0" layoutY="76.0" text="label" textAlignment="JUSTIFY" textFill="#0c41d4">
                                  <font>
                                     <Font name="Calibri Bold" size="14.0" />
                                  </font>
                               </Label>
-                              <FontAwesomeIconView fill="#b725c1" glyphName="INSTAGRAM" layoutX="202.0" layoutY="47.0" size="25" />
-                              <Label fx:id="instagram_output" layoutX="199.0" layoutY="57.0" text="label" textAlignment="JUSTIFY" textFill="#0c41d4">
+                              <FontAwesomeIconView fill="#b725c1" glyphName="INSTAGRAM" layoutX="201.0" layoutY="65.0" size="25" />
+                              <Label fx:id="instagram_output" layoutX="198.0" layoutY="76.0" text="label" textAlignment="JUSTIFY" textFill="#0c41d4">
                                  <font>
                                     <Font name="Calibri Bold" size="14.0" />
                                  </font>
@@ -147,7 +148,7 @@
                               <Label layoutX="103.0" layoutY="6.0" text="Очередь" />
                            </children>
                         </Pane>
-                                <ToggleButton fx:id="readyForChat" layoutX="1257.0" layoutY="795.0" mnemonicParsing="false" onAction="#readyForChat" text="chat on/off">
+                                <ToggleButton fx:id="readyForWork" layoutX="27.0" layoutY="754.0" mnemonicParsing="false" onAction="#setReadyForWork" prefHeight="25.0" prefWidth="131.0" style="-fx-background-radius: 5em; -fx-background-color: #F7FF47;" text="Начать работу" textFill="#141413">
                            <graphic>
                               <FontAwesomeIconView glyphName="TOGGLE_ON" size="15" />
                            </graphic>

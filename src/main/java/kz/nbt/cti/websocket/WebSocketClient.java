@@ -63,22 +63,24 @@ public class WebSocketClient extends AgentStateUI
                         String fullMesage = jsonObject.getString("content");
                         static_chat_output.appendText(dtime+" Клиент: " +fullMesage+"\n");
                         String clientid = jsonObject.getString("from");
-                        System.out.println("Tetst");
                         static_ctiInfo.setText(clientid);
                         CRMOps ops = new CRMOps();
                         ops.getCustomerInfo(clientid);
 
-                        CallTimer  timer = new CallTimer();
-                        timer.start();
-                        Platform.runLater(new Runnable() {
-                            @Override
-                            public void run() {
-                                static_current_channel.setText("chat");
-                            }
-                        });
+
 
 
                         if(AgentState.voiceIsReady){
+
+                            CallTimer  timer = new CallTimer();
+                            timer.start();
+                            Platform.runLater(new Runnable() {
+                                @Override
+                                public void run() {
+                                    static_current_channel.setText("chat");
+                                }
+                            });
+
                             AgentOps agentOps = new AgentOps();
                             System.out.println("Set agent telephony state to false");
                             agentOps.setTelephonyState(false);

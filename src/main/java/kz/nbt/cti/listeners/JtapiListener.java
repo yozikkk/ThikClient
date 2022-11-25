@@ -61,8 +61,6 @@ public class JtapiListener extends AgentStateUI implements CallControlTerminalCo
             long time = System.currentTimeMillis();
             SimpleDateFormat dayTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
             String str = dayTime.format(new Date(time));
-            // static_ctiInfo.appendText("connectionAlerting :: :: CallID ::"+callID+"::Calling party::"+callingAddress.getName()+"::Called party::"+calledAddress.getName()+"\n");
-
             CallTimer.stop();
             Platform.runLater(new Runnable() {
                 @Override

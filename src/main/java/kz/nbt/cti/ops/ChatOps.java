@@ -1,5 +1,6 @@
 package kz.nbt.cti.ops;
 
+import javafx.application.Platform;
 import kz.nbt.cti.AgentState;
 import kz.nbt.cti.controller.AgentStateUI;
 import kz.nbt.cti.restapi.CallRestAPI;
@@ -46,11 +47,25 @@ public class ChatOps extends AgentStateUI {
 
     public void nextChat() throws InvalidArgumentException, InvalidStateException {
 
-        AgentOps agentOps = new AgentOps();
-        agentOps.setTelephonyState(true);
-        CallTimer.stop();
-        static_call_timer.setText("00:00:00");
-        static_current_channel.setText("none");
+
+        try{
+
+            AgentOps agentOps = new AgentOps();
+            agentOps.setTelephonyState(true);
+            CallTimer.stop();
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    static_call_timer.setText("00:00:00");
+                    static_current_channel.setText("none");
+                }
+            });
+        }
+
+        catch (Exception e){
+            e.printStackTrace();
+        }
+
 
 
 

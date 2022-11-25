@@ -38,12 +38,6 @@ public class AgentOps {
             lucentTerm = (LucentTerminal)provider.getTerminal(station);
             lucentAgent = (LucentV7Agent)lucentTerm.addAgent(
                     lucentAddr, null, Agent.LOG_IN, 0, agent, passwd);
-
-
-
-
-
-
     }
 
     public void logout() throws InvalidArgumentException, InvalidStateException {
@@ -76,7 +70,7 @@ public class AgentOps {
 
     public void  updateAgentState(boolean state) throws InvalidArgumentException, InvalidStateException {
 
-        // setTelephonyState(state);
+        setTelephonyState(state);
         String json =  "{ "
                 + "\"ready\":\""+state+"\","
                 + "\"agentid\":\""+ AgentState.agentid+"\"}";
@@ -87,8 +81,6 @@ public class AgentOps {
         catch (Exception e){
             e.printStackTrace();
         }
-
-
 
     }
 

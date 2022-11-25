@@ -32,7 +32,7 @@ public class AgentStateUI implements Initializable {
     private PieChart pieChartByChannels;
     @FXML
     private javafx.scene.control.Button logoutButton;
-    public ToggleButton readyForChat;
+    public ToggleButton readyForWork;
     public TextArea ctiInfo;
     public TextArea chat_output;
     public TextField chat_input;
@@ -91,25 +91,23 @@ public class AgentStateUI implements Initializable {
         stage.close();
     }
 
-    @FXML
-    public void updateText(){
-        ctiInfo.appendText("Text updated");
-    }
 
     @FXML
-    protected void readyForChat() throws InvalidArgumentException, InvalidStateException {
+    protected void setReadyForWork() throws InvalidArgumentException, InvalidStateException {
         AgentOps ops = new AgentOps();
-        if(readyForChat.isSelected()){
+        if(readyForWork.isSelected()){
             AgentState.isReady = true;
-            readyForChat.setText("chat on");
-            readyForChat.setStyle("-fx-background-color:#63E88C");
+            readyForWork.setText("В работе");
+            //readyForWork.setStyle("-fx-background-radius: 5em");
+            readyForWork.setStyle("-fx-background-color:#63E88C;-fx-background-radius: 5em");
             ops.updateAgentState(true);
         }
         else {
             AgentState.isReady = false;
             ops.updateAgentState(false);
-            readyForChat.setText("chat off");
-            readyForChat.setStyle("-fx-background-color:#F68181");
+            readyForWork.setText("Не готов");
+           // readyForWork.setStyle("-fx-background-radius: 5em");
+            readyForWork.setStyle("-fx-background-color:#F68181;-fx-background-radius: 5em");
         }
     }
 

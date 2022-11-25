@@ -59,6 +59,7 @@ public class CallTimer extends AgentStateUI {
     public static void stop(){
         timerCustom.cancel();
         timerCustom.purge();
+        totalSec=0;
     }
 
 
