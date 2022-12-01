@@ -55,11 +55,6 @@ public class WebSocketClient extends AgentStateUI
                             }
                         }
 
-
-                       // if(AgentState.voiceIsReady){
-
-
-                        //}
                         String fullMesage = jsonObject.getString("content");
                         static_chat_output.appendText(dtime+" Клиент: " +fullMesage+"\n");
                         String clientid = jsonObject.getString("from");
@@ -77,6 +72,7 @@ public class WebSocketClient extends AgentStateUI
                             Platform.runLater(new Runnable() {
                                 @Override
                                 public void run() {
+                                    AgentState.currentChannel = "chat";
                                     static_current_channel.setText("chat");
                                 }
                             });
@@ -86,13 +82,6 @@ public class WebSocketClient extends AgentStateUI
                             agentOps.setTelephonyState(false);
 
                         }
-
-
-
-
-                        //AlertController alertController = new AlertController();
-                        //alertController.showEvent();
-
 
 
                     }

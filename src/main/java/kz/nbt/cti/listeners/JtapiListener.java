@@ -7,16 +7,12 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import kz.nbt.cti.AgentState;
+import kz.nbt.cti.connhandler.ConnStorage;
 import kz.nbt.cti.controller.AgentStateUI;
 import kz.nbt.cti.restapi.CallRestAPI;
 import kz.nbt.cti.timer.CallTimer;
 
-import javax.telephony.Address;
-import javax.telephony.CallEvent;
-import javax.telephony.ConnectionEvent;
-import javax.telephony.MetaEvent;
-import javax.telephony.Terminal;
-import javax.telephony.TerminalConnectionEvent;
+import javax.telephony.*;
 import javax.telephony.callcenter.CallCenterCall;
 import javax.telephony.callcontrol.CallControlConnectionEvent;
 import javax.telephony.callcontrol.CallControlTerminalConnectionEvent;
@@ -116,7 +112,6 @@ public class JtapiListener extends AgentStateUI implements CallControlTerminalCo
     @Override
     public void terminalConnectionRinging(CallControlTerminalConnectionEvent callControlTerminalConnectionEvent) {
 
-        System.out.println("terminalConnectionRinging");
 
     }
 
@@ -124,8 +119,11 @@ public class JtapiListener extends AgentStateUI implements CallControlTerminalCo
     public void terminalConnectionTalking(CallControlTerminalConnectionEvent callControlTerminalConnectionEvent) {
 
 
+
         String ucid = CallUtils.getUCID(callControlTerminalConnectionEvent.getCall());
         long callID = CallUtils.getCallID(callControlTerminalConnectionEvent.getCall());
+
+        Call call = callControlTerminalConnectionEvent.getCall();
         callingAddress = callControlTerminalConnectionEvent.getCallingAddress();
         calledAddress = callControlTerminalConnectionEvent.getCalledAddress();
 
@@ -134,18 +132,39 @@ public class JtapiListener extends AgentStateUI implements CallControlTerminalCo
             long time = System.currentTimeMillis();
             SimpleDateFormat dayTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
             String str = dayTime.format(new Date(time));
-            // static_ctiInfo.appendText("connectionAlerting :: :: CallID ::"+callID+"::Calling party::"+callingAddress.getName()+"::Called party::"+calledAddress.getName()+"\n");
             CallTimer timer = new CallTimer();
             timer.start();
+
+
+
+
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    AgentState.currentChannel="voice";
+                    static_ctiInfo.setText(callingAddress.getName());
+                    static_current_channel.setText("voice");
+                }
+            });
+            Connection[] conn = call.getConnections();
+            ConnStorage storage = new ConnStorage();
+            storage.saveConnection(conn);
+
+
+
+
             String json =  "{ "
+                    + "\"chatId\":\""+callingAddress.getName()+"\","
+                    + "\"channel\":\""+"voice"+"\","
                     + "\"agentid\":\""+ AgentState.agentid+"\"}";
             CallRestAPI api = new CallRestAPI();
             try{
-                api.doPost(json,"unAssignChatToAgent");
+                api.doPost(json,"assignChatToAgent");
             }
             catch (Exception e){
                 e.printStackTrace();
             }
+
         }
 
         catch (Exception e){
@@ -199,6 +218,7 @@ public class JtapiListener extends AgentStateUI implements CallControlTerminalCo
     @Override
     public void connectionAlerting(CallControlConnectionEvent callControlConnectionEvent) {
 
+        /*
         String ucid = CallUtils.getUCID(callControlConnectionEvent.getCall());
         long callID = CallUtils.getCallID(callControlConnectionEvent.getCall());
         callingAddress = callControlConnectionEvent.getCallingAddress();
@@ -247,6 +267,8 @@ public class JtapiListener extends AgentStateUI implements CallControlTerminalCo
 
 
 
+         */
+
 
     }
 
@@ -264,6 +286,9 @@ public class JtapiListener extends AgentStateUI implements CallControlTerminalCo
     public void connectionEstablished(CallControlConnectionEvent callControlConnectionEvent) {
 
     }
+
+
+
 
     @Override
     public void connectionFailed(CallControlConnectionEvent callControlConnectionEvent) {
@@ -307,7 +332,6 @@ public class JtapiListener extends AgentStateUI implements CallControlTerminalCo
 
     @Override
     public void connectionConnected(ConnectionEvent connectionEvent) {
-
     }
 
     @Override

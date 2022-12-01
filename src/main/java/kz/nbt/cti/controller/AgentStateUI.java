@@ -6,28 +6,23 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.PieChart;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleButton;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import kz.nbt.cti.AgentState;
+import kz.nbt.cti.connhandler.ConnStorage;
 import kz.nbt.cti.ops.AgentOps;
 import kz.nbt.cti.ops.ChatOps;
 
-import javax.telephony.InvalidArgumentException;
-import javax.telephony.InvalidStateException;
+import javax.telephony.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class AgentStateUI implements Initializable {
 
-
-
+    public Button drop_call;
     @FXML
     private PieChart pieChartByChannels;
     @FXML
@@ -52,31 +47,19 @@ public class AgentStateUI implements Initializable {
     public  Label voice_channel_status;
     public static Label static_chat_channel_status;
     public  static Label static_voice_channel_status;
-
     public TextArea name;
     public TextArea surname;
-
     public TextArea address;
-
     public  TextArea email;
-
     public TextArea balance;
-
     public Label call_timer;
-
     public Label current_channel;
-
     public static Label static_call_timer;
-
-
     public static  TextArea static_name;
     public static  TextArea static_surname;
     public static  TextArea static_address;
     public static  TextArea static_email;
-
     public static  TextArea static_balance;
-
-
     public static  Label static_current_channel;
 
 
@@ -98,7 +81,6 @@ public class AgentStateUI implements Initializable {
         if(readyForWork.isSelected()){
             AgentState.isReady = true;
             readyForWork.setText("В работе");
-            //readyForWork.setStyle("-fx-background-radius: 5em");
             readyForWork.setStyle("-fx-background-color:#63E88C;-fx-background-radius: 5em");
             ops.updateAgentState(true);
         }
@@ -106,7 +88,6 @@ public class AgentStateUI implements Initializable {
             AgentState.isReady = false;
             ops.updateAgentState(false);
             readyForWork.setText("Не готов");
-           // readyForWork.setStyle("-fx-background-radius: 5em");
             readyForWork.setStyle("-fx-background-color:#F68181;-fx-background-radius: 5em");
         }
     }
@@ -115,22 +96,9 @@ public class AgentStateUI implements Initializable {
 
     @FXML
     public void showEvent() throws IOException {
-
         System.out.println("Alert event form");
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.showAndWait();
-
-        /*
-
-        Parent root =  FXMLLoader.load(getClass().getClassLoader().getResource("Incoming_event.fxml"));
-        Scene scene = new Scene(root);
-        Stage stage = new Stage();
-        stage.setTitle("Agent State UI");
-        stage.setScene(scene);
-        stage.initModality(Modality.NONE);
-        stage.show();
-
-         */
     }
 
 
@@ -194,13 +162,28 @@ public class AgentStateUI implements Initializable {
     }
 
     @FXML
-    protected void nextChat() throws InvalidArgumentException, InvalidStateException {
-        ChatOps chatOps = new ChatOps();
-        chat_output.clear();
-        chatOps.nextChat();
+    protected void nextChat() throws InvalidArgumentException, InvalidStateException, ResourceUnavailableException, MethodNotSupportedException, PrivilegeViolationException {
+
+
+        if(AgentState.currentChannel.equals("voice")){
+            AgentOps agentOps = new AgentOps();
+            agentOps.dropConnection(ConnStorage.connection);
+        }
+        else{
+
+            ChatOps chatOps = new ChatOps();
+            chat_output.clear();
+            chatOps.nextChat();
+
+        }
 
     }
 
+    @FXML
+    protected void  dropTheCall() throws ResourceUnavailableException, MethodNotSupportedException, PrivilegeViolationException, InvalidStateException {
+        AgentOps agentOps = new AgentOps();
+        agentOps.dropConnection(ConnStorage.connection);
 
+    }
 
 }

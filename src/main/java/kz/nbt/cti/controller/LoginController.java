@@ -1,12 +1,11 @@
 package kz.nbt.cti.controller;
 
-import com.avaya.jtapi.tsapi.TsapiPlatformException;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -69,13 +68,25 @@ public class LoginController implements Initializable {
         try{
             callJTapi.login(ext.getText(),agent.getText(),passwd.getText());
             callJTapi.addCallListener();
-            static_voice_channel_status.setText("Logged in");
-            static_voice_channel_status.setStyle("-fx-background-color:#63E88C");
+
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    static_voice_channel_status.setText("Logged in");
+                    static_voice_channel_status.setStyle("-fx-background-color:#63E88C");
+
+                }
+            });
         }
 
         catch (Exception e){
-            static_voice_channel_status.setText("Logged out");
-            static_voice_channel_status.setStyle("-fx-background-color:#F68181");
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    static_voice_channel_status.setText("Logged out");
+                    static_voice_channel_status.setStyle("-fx-background-color:#F68181");
+                }
+            });
 
         }
 
@@ -95,14 +106,26 @@ public class LoginController implements Initializable {
                     + "\"loginTime\":\""+date+"\"}";
 
             rest.doPost(json, "addAgent");
-            static_chat_channel_status.setText("Logged in");
-            static_chat_channel_status.setStyle("-fx-background-color:#63E88C");
+
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    static_chat_channel_status.setText("Logged in");
+                    static_chat_channel_status.setStyle("-fx-background-color:#63E88C");
+                }
+            });
+
 
         }
         catch (Exception e){
-            static_chat_channel_status.setText("Logged out");
-            static_chat_channel_status.setStyle("-fx-background-color:#F68181");
 
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    static_chat_channel_status.setText("Logged out");
+                    static_chat_channel_status.setStyle("-fx-background-color:#F68181");
+                }
+            });
         }
 
 

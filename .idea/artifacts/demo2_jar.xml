@@ -12,15 +12,13 @@
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/json/json/20220924/json-20220924.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-controls/19/javafx-controls-19-win.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-base/19/javafx-base-19-win.jar" path-in-jar="/" />
-      <element id="dir-copy" path="$USER_HOME$/Downloads/jtapi-sdk-10.1.0.2.0.12/jtapi-sdk-10.1.0.2.0.12/jtapi-sdk/lib/ecsjtapia" />
-      <element id="extracted-dir" path="$USER_HOME$/Downloads/jtapi-sdk-10.1.0.2.0.12/jtapi-sdk-10.1.0.2.0.12/jtapi-sdk/lib/log4j-api-2.17.3-snapshot.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/Downloads/jtapi-sdk-10.1.0.2.0.12/jtapi-sdk-10.1.0.2.0.12/jtapi-sdk/lib/log4j-core-2.17.3-snapshot.jar" path-in-jar="/" />
-      <element id="dir-copy" path="$MAVEN_REPOSITORY$/com/neovisionaries/nv-websocket-client/1.13/nv-websocket-client-1.13" />
-      <element id="extracted-dir" path="$USER_HOME$/Downloads/fontawesomefx-8.0.1.jar/fontawesomefx-8.0.1.jar" path-in-jar="/" />
-      <element id="dir-copy" path="$USER_HOME$/Downloads/fontawesomefx-8.0.1.jar/fontawesomefx-8.0.1" />
       <element id="directory" name="fontawsome" />
-      <element id="dir-copy" path="$MAVEN_REPOSITORY$/de/jensd/fontawesomefx-fontawesome/4.7.0-9.1.2/fontawesomefx-fontawesome-4.7.0-9.1.2" />
-      <element id="dir-copy" path="$MAVEN_REPOSITORY$/de/jensd/fontawesomefx-commons/9.1.2/fontawesomefx-commons-9.1.2" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../ws/java_libs/thikclient/jtapi-sdk-10.1.0.2.0.12/jtapi-sdk/lib/log4j-api-2.17.3-snapshot.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../ws/java_libs/thikclient/jtapi-sdk-10.1.0.2.0.12/jtapi-sdk/lib/log4j-core-2.17.3-snapshot.jar" path-in-jar="/" />
+      <element id="dir-copy" path="$PROJECT_DIR$/../../../../ws/java_libs/thikclient/jtapi-sdk-10.1.0.2.0.12/jtapi-sdk/lib/ecsjtapia" />
+      <element id="dir-copy" path="$PROJECT_DIR$/../../../../ws/java_libs/thikclient/neovisionaries/nv-websocket-client/1.13/nv-websocket-client-1.13" />
+      <element id="dir-copy" path="$PROJECT_DIR$/../../../../ws/java_libs/thikclient/jensd/fontawesomefx-fontawesome/4.7.0-9.1.2/fontawesomefx-fontawesome-4.7.0-9.1.2" />
+      <element id="dir-copy" path="$PROJECT_DIR$/../../../../ws/java_libs/thikclient/jensd/fontawesomefx-commons/9.1.2/fontawesomefx-commons-9.1.2" />
     </root>
   </artifact>
 </component>

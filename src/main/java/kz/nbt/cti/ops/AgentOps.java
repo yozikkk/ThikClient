@@ -7,12 +7,12 @@ import com.avaya.jtapi.tsapi.LucentTerminal;
 import com.avaya.jtapi.tsapi.LucentV7Agent;
 import kz.nbt.cti.AgentState;
 import kz.nbt.cti.ProviderInitialize;
+import kz.nbt.cti.connhandler.ConnStorage;
+import kz.nbt.cti.listeners.CallUtils;
 import kz.nbt.cti.listeners.JtapiListener;
 import kz.nbt.cti.restapi.CallRestAPI;
 
-import javax.telephony.InvalidArgumentException;
-import javax.telephony.InvalidStateException;
-import javax.telephony.Provider;
+import javax.telephony.*;
 import javax.telephony.callcenter.Agent;
 
 public class AgentOps {
@@ -21,9 +21,7 @@ public class AgentOps {
     public static LucentTerminal lucentTerm;
     public static LucentAgent lucentAgent;
     public static Provider provider;
-
     public static JtapiListener listener;
-
     public static String station;
 
 
@@ -96,9 +94,17 @@ public class AgentOps {
         }
     }
 
+    public void dropConnection(Connection connection) throws ResourceUnavailableException, MethodNotSupportedException, PrivilegeViolationException, InvalidStateException {
+        connection.disconnect();
+
+    }
+
+
+    }
 
 
 
-}
+
+
 
 
