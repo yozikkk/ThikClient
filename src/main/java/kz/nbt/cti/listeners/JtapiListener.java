@@ -9,6 +9,7 @@ import javafx.scene.control.TextArea;
 import kz.nbt.cti.AgentState;
 import kz.nbt.cti.connhandler.ConnStorage;
 import kz.nbt.cti.controller.AgentStateUI;
+import kz.nbt.cti.ops.ChatOps;
 import kz.nbt.cti.restapi.CallRestAPI;
 import kz.nbt.cti.timer.CallTimer;
 
@@ -67,11 +68,6 @@ public class JtapiListener extends AgentStateUI implements CallControlTerminalCo
                 }
             });
 
-
-
-
-
-
             String json =  "{ "
                     + "\"agentid\":\""+ AgentState.agentid+"\"}";
             CallRestAPI api = new CallRestAPI();
@@ -120,6 +116,7 @@ public class JtapiListener extends AgentStateUI implements CallControlTerminalCo
 
 
 
+        /*
         String ucid = CallUtils.getUCID(callControlTerminalConnectionEvent.getCall());
         long callID = CallUtils.getCallID(callControlTerminalConnectionEvent.getCall());
 
@@ -141,9 +138,18 @@ public class JtapiListener extends AgentStateUI implements CallControlTerminalCo
             Platform.runLater(new Runnable() {
                 @Override
                 public void run() {
-                    AgentState.currentChannel="voice";
-                    static_ctiInfo.setText(callingAddress.getName());
-                    static_current_channel.setText("voice");
+                    if(callingAddress.getName().equals("4950")){
+                        AgentState.currentChannel="chat";
+                        static_ctiInfo.setText("");
+                        static_current_channel.setText("chat");
+
+                    }
+                    else {
+                        AgentState.currentChannel="voice";
+                        static_ctiInfo.setText(callingAddress.getName());
+                        static_current_channel.setText("voice");
+                    }
+
                 }
             });
             Connection[] conn = call.getConnections();
@@ -151,19 +157,24 @@ public class JtapiListener extends AgentStateUI implements CallControlTerminalCo
             storage.saveConnection(conn);
 
 
+            ChatOps ops = new ChatOps();
 
 
+            System.out.println("Updating dmcc rec");
             String json =  "{ "
-                    + "\"chatId\":\""+callingAddress.getName()+"\","
-                    + "\"channel\":\""+"voice"+"\","
+                    + "\"dmccPhone\":\""+callingAddress.getName()+"\","
+                  //  + "\"channel\":\""+"voice"+"\","
                     + "\"agentid\":\""+ AgentState.agentid+"\"}";
             CallRestAPI api = new CallRestAPI();
             try{
-                api.doPost(json,"assignChatToAgent");
+                ops.getNextChat();
+                api.doPost(json,"assignDmccPhone");
             }
             catch (Exception e){
                 e.printStackTrace();
             }
+
+
 
         }
 
@@ -173,6 +184,8 @@ public class JtapiListener extends AgentStateUI implements CallControlTerminalCo
 
 
 
+
+         */
 
 
 
@@ -187,6 +200,8 @@ public class JtapiListener extends AgentStateUI implements CallControlTerminalCo
 
     @Override
     public void terminalConnectionActive(TerminalConnectionEvent terminalConnectionEvent) {
+
+
 
     }
 
@@ -217,10 +232,10 @@ public class JtapiListener extends AgentStateUI implements CallControlTerminalCo
 
     @Override
     public void connectionAlerting(CallControlConnectionEvent callControlConnectionEvent) {
-
-        /*
         String ucid = CallUtils.getUCID(callControlConnectionEvent.getCall());
         long callID = CallUtils.getCallID(callControlConnectionEvent.getCall());
+
+        Call call = callControlConnectionEvent.getCall();
         callingAddress = callControlConnectionEvent.getCallingAddress();
         calledAddress = callControlConnectionEvent.getCalledAddress();
 
@@ -229,25 +244,48 @@ public class JtapiListener extends AgentStateUI implements CallControlTerminalCo
             long time = System.currentTimeMillis();
             SimpleDateFormat dayTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
             String str = dayTime.format(new Date(time));
-           // static_ctiInfo.appendText("connectionAlerting :: :: CallID ::"+callID+"::Calling party::"+callingAddress.getName()+"::Called party::"+calledAddress.getName()+"\n");
+            CallTimer timer = new CallTimer();
+            timer.start();
+
+
+
+
             Platform.runLater(new Runnable() {
                 @Override
                 public void run() {
-                    static_ctiInfo.setText(callingAddress.getName());
-                    static_current_channel.setText("voice");
+                    if(callingAddress.getName().equals("4950")||
+                            callingAddress.getName().equals("4951")||
+                            callingAddress.getName().equals("4952")){
+                        AgentState.currentChannel="chat";
+                        static_ctiInfo.setText("");
+                        static_current_channel.setText("chat");
+
+                    }
+                    else {
+                        AgentState.currentChannel="voice";
+                        static_ctiInfo.setText(callingAddress.getName());
+                        static_current_channel.setText("voice");
+                    }
+
                 }
             });
+            Connection[] conn = call.getConnections();
+            ConnStorage storage = new ConnStorage();
+            storage.saveConnection(conn);
 
 
+            ChatOps ops = new ChatOps();
 
 
+            System.out.println("Updating dmcc rec");
             String json =  "{ "
-                    + "\"chatId\":\""+callingAddress.getName()+"\","
-                    + "\"channel\":\""+"voice"+"\","
+                    + "\"dmccPhone\":\""+callingAddress.getName()+"\","
+                    //  + "\"channel\":\""+"voice"+"\","
                     + "\"agentid\":\""+ AgentState.agentid+"\"}";
             CallRestAPI api = new CallRestAPI();
             try{
-                api.doPost(json,"assignChatToAgent");
+                ops.getNextChat();
+                api.doPost(json,"assignDmccPhone");
             }
             catch (Exception e){
                 e.printStackTrace();
@@ -255,19 +293,13 @@ public class JtapiListener extends AgentStateUI implements CallControlTerminalCo
 
 
 
-
         }
 
         catch (Exception e){
-
             System.err.println(e);
         }
 
 
-
-
-
-         */
 
 
     }
@@ -332,6 +364,7 @@ public class JtapiListener extends AgentStateUI implements CallControlTerminalCo
 
     @Override
     public void connectionConnected(ConnectionEvent connectionEvent) {
+
     }
 
     @Override
@@ -361,6 +394,7 @@ public class JtapiListener extends AgentStateUI implements CallControlTerminalCo
 
     @Override
     public void callActive(CallEvent callEvent) {
+
 
     }
 

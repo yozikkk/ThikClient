@@ -65,6 +65,8 @@ public class WebSocketClient extends AgentStateUI
 
 
 
+
+                        /*
                         if(AgentState.voiceIsReady){
 
                             CallTimer  timer = new CallTimer();
@@ -83,6 +85,8 @@ public class WebSocketClient extends AgentStateUI
 
                         }
 
+
+                         */
 
                     }
                 })

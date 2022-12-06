@@ -164,18 +164,12 @@ public class AgentStateUI implements Initializable {
     @FXML
     protected void nextChat() throws InvalidArgumentException, InvalidStateException, ResourceUnavailableException, MethodNotSupportedException, PrivilegeViolationException {
 
-
-        if(AgentState.currentChannel.equals("voice")){
             AgentOps agentOps = new AgentOps();
             agentOps.dropConnection(ConnStorage.connection);
-        }
-        else{
-
             ChatOps chatOps = new ChatOps();
             chat_output.clear();
             chatOps.nextChat();
 
-        }
 
     }
 
